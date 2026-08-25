@@ -12,7 +12,7 @@ env-down:
 env-cleanup:
 	@read -p "Are you sure you want to remove the database volume? (y/N): " ans; \
 	if [ "$$ans" = "y" ] || [ "$$ans" = "Y" ]; then \
-		docker compose down todoapp-postgres && \
+		docker compose down todoapp-postgres port-forwarder && \
 		sudo rm -rf out/pgdata && \
 		echo "Cleanup completed."; \
 	else \
@@ -54,3 +54,9 @@ env-port-forward:
 	
 env-port-close:
 	@docker compose down port-forwarder
+
+todoapp-run:
+	@export LOGGER_FOLDER=$(PROJECT_ROOT)/out/logs && \
+	export POSTGRES_HOST=localhost && \
+	go mod tidy && \
+	go run cmd/todoapp/main.go
