@@ -24,7 +24,7 @@ migrate-create:
 		echo "Error: Please provide a sequence number using 'make migrate-create seq=<number>'"; \
 		exit 1; \
 	fi; \
-	docker compose run --rm todoapp-postgres-migrate \
+	PROJECT_ROOT=$(PROJECT_ROOT) docker compose run --rm todoapp-postgres-migrate \
 		create \
 		-ext sql \
 		-dir migrations \
@@ -44,7 +44,7 @@ migrate-action:
 		echo "Error: Please provide an action using 'make migrate-action action=<up|down>'"; \
 		exit 1; \
 	fi; \
-	docker compose run --rm todoapp-postgres-migrate \
+	PROJECT_ROOT=$(PROJECT_ROOT) docker compose run --rm todoapp-postgres-migrate \
 		-path /migrations \
 		-database postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@todoapp-postgres:5432/$(POSTGRES_DB)?sslmode=disable \
 		"$(action)"
@@ -60,7 +60,7 @@ logs-cleanup:
 
 env-port-forward:
 	@docker compose up -d port-forwarder
-	
+    
 env-port-close:
 	@docker compose down port-forwarder
 
@@ -69,3 +69,12 @@ todoapp-run:
 	export POSTGRES_HOST=localhost && \
 	go mod tidy && \
 	go run cmd/todoapp/main.go
+
+todoapp-deploy:
+	@docker compose up -d --build todoapp
+
+todoapp-undeploy:
+	@docker compose down todoapp
+
+ps:
+	@docker compose ps
