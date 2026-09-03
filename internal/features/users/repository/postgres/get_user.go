@@ -29,7 +29,7 @@ func (r *UsersRepository) GetUser(
 
 	err := row.Scan(
 		&userModel.ID,
-		&userModel.Verison,
+		&userModel.Version,
 		&userModel.FullName,
 		&userModel.PhoneNumber,
 	)
@@ -47,7 +47,7 @@ func (r *UsersRepository) GetUser(
 
 	userDomain := domain.NewUser(
 		userModel.ID,
-		userModel.Verison,
+		userModel.Version,
 		userModel.FullName,
 		userModel.PhoneNumber,
 	)
