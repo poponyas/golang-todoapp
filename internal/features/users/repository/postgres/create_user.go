@@ -25,7 +25,7 @@ func (r *UsersRepository) CreateUser(
 
 	err := row.Scan(
 		&userModel.ID,
-		&userModel.Verison,
+		&userModel.Version,
 		&userModel.FullName,
 		&userModel.PhoneNumber,
 	)
@@ -35,7 +35,7 @@ func (r *UsersRepository) CreateUser(
 
 	userDomain := domain.NewUser(
 		userModel.ID,
-		userModel.Verison,
+		userModel.Version,
 		userModel.FullName,
 		userModel.PhoneNumber,
 	)

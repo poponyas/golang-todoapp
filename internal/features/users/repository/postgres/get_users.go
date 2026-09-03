@@ -40,7 +40,7 @@ func (r *UsersRepository) GetUsers(
 
 		err := rows.Scan(
 			&userModel.ID,
-			&userModel.Verison,
+			&userModel.Version,
 			&userModel.FullName,
 			&userModel.PhoneNumber,
 		)

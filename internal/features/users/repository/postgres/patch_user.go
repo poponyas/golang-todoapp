@@ -43,7 +43,7 @@ func (r *UsersRepository) PatchUser(
 	var userModel UserModel
 	err := row.Scan(
 		&userModel.ID,
-		&userModel.Verison,
+		&userModel.Version,
 		&userModel.FullName,
 		&userModel.PhoneNumber,
 	)
@@ -62,7 +62,7 @@ func (r *UsersRepository) PatchUser(
 
 	userDomain := domain.NewUser(
 		userModel.ID,
-		userModel.Verison,
+		userModel.Version,
 		userModel.FullName,
 		userModel.PhoneNumber,
 	)

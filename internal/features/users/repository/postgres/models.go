@@ -4,7 +4,7 @@ import "github.com/poponyas/golang-todoapp/internal/core/domain"
 
 type UserModel struct {
 	ID          int
-	Verison     int
+	Version     int
 	FullName    string
 	PhoneNumber *string
 }
@@ -15,7 +15,7 @@ func userDomainsFromModels(users []UserModel) []domain.User {
 	for i, user := range users {
 		userDomains[i] = domain.NewUser(
 			user.ID,
-			user.Verison,
+			user.Version,
 			user.FullName,
 			user.PhoneNumber,
 		)
